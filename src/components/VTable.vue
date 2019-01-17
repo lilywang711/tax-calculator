@@ -7,7 +7,7 @@
     </thead>
     <tbody ref="tbody">
       <tr v-for="(row, index) in data" :key="index">
-        <td v-for="(cell, index) in row" :key="index">{{cell}}</td>
+        <td v-for="(cell, index) in row" :key="index">{{paddingZero(cell)}}</td>
       </tr>
       <tr v-if="summaryMethod">
         <td v-for="(column, cellIndex) in columns" :key="cellIndex">{{sums[cellIndex]}}</td>
@@ -16,6 +16,9 @@
   </table>
 </template>
 <script>
+const paddingZero = (num) => {
+  return ('' + num).split('.')[1] ? num.toFixed(2) : num
+}
 export default {
   props: {
     columns: Array,
@@ -25,6 +28,7 @@ export default {
   },
   data () {
     return {
+      paddingZero
     }
   },
   computed: {

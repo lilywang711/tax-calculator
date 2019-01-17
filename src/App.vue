@@ -43,6 +43,7 @@
 import VTable from '@/components/VTable'
 
 /* util function */
+
 const isNumber = (val) => {
   return val && !isNaN(val)
 }
@@ -141,12 +142,13 @@ export default {
           payTaxMoney,
           taxRate,
           taxConst,
-          totalTax,
-          income
+          totalTax: totalTax,
+          income: income
         })
       }
       return result
     },
+
     getTaxRate (income, type) {
       let totalTax = 0
       let rate = 0
@@ -190,7 +192,7 @@ export default {
         totalTax = income * rate - taxConst
       }
       return {
-        totalTax: Number(totalTax.toFixed(2)),
+        totalTax: totalTax,
         taxRate: rate * 100 + '%',
         taxConst
       }
@@ -202,7 +204,6 @@ export default {
         } else if (this.wage - this.taxPoint - this.welfare - this.deduct > 0) {
           this.getData()
         } else {
-          console.log(this.taxPoint, Number(this.welfare), this.deduct)
           alert(`出错了！工资应大于起征点、社保、专项扣除之和(${Number(this.taxPoint) + Number(this.welfare) + Number(this.deduct)})`)
         }
       } else {
@@ -221,7 +222,7 @@ export default {
         if (column.prop !== 'income') {
           return '-'
         } else {
-          return totalIncome
+          return parseInt(totalIncome)
         }
       })
     }
