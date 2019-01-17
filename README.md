@@ -1,4 +1,4 @@
-# mock-server-demo
+# tax-calculator
 
 ## Project setup
 ```
